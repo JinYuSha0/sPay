@@ -100,7 +100,7 @@ const asyncMemo = (p) => {
 
     return () => {
         if (complete) {
-            return new Promise((resolve) => resolve(res))
+            return Promise.resolve(res)
         } else {
             return pro
         }
