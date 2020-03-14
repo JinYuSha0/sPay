@@ -1,4 +1,4 @@
-const errorCode = require('../constant/errorCode')
+const errorCode = require('@constant/errorCode')
 
 module.exports = async (ctx, next) => {
     const { socket } = ctx.state

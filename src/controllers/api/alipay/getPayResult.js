@@ -1,5 +1,5 @@
-const error = require('../../constant/error')
-const { config } = require('../../constant/config')
+const error = require('@constant/error')
+const { config } = require('@constant/config')
 const { promisify } = require('util')
 
 module.exports = async (ctx, next) => {

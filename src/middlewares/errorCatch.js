@@ -1,5 +1,5 @@
-const utils = require('../utils/utils')
-const errorCode = require('../constant/errorCode')
+const utils = require('@utils/utils')
+const errorCode = require('@constant/errorCode')
 
 module.exports = async (ctx, next) => {
     try {

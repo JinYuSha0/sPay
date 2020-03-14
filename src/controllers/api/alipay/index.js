@@ -1,5 +1,5 @@
 const Router = require('koa-router')
-const middlewares = require('../../middlewares')
+const middlewares = require('@middlewares')
 
 const AlipayRouter = new Router()
 

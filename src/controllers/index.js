@@ -1,9 +1,11 @@
 const Router = require('koa-router')
-const alipayRouter = require('./alipay/index')
+const apiRouter = require('./api')
+const pageRouter = require('./page')
 
 const router = new Router()
 
-router.use('/a', alipayRouter.routes(), alipayRouter.allowedMethods())
+router.use('/page', pageRouter.routes(), pageRouter.allowedMethods())
+router.use('/api', apiRouter.routes(), apiRouter.allowedMethods())
 
 router.get('*', async (ctx, next) => {
     ctx.status = 404

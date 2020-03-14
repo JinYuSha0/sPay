@@ -1,5 +1,5 @@
-const event = require('../constant/event')
-const utils = require('../utils/utils')
+const event = require('@constant/event')
+const utils = require('@utils/utils')
 const { TaskPool } = utils
 
 module.exports = async ({

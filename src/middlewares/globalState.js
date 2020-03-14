@@ -1,4 +1,4 @@
-const errorCode = require('../constant/errorCode')
+const errorCode = require('@constant/errorCode')
 
 module.exports = (externalParams) => async (ctx, next) => {
     const { taskPool, getSocket, getModelsPromise, redis } = externalParams

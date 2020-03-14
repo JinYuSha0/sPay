@@ -1,5 +1,5 @@
-const event = require('../constant/event')
-const { config } = require('../constant/config')
+const event = require('@constant/event')
+const { config } = require('@constant/config')
 
 module.exports = (io, taskPool) => {
     let _socket = null, isConnect = false

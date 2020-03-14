@@ -1,4 +1,4 @@
-const getBillDetail = require('../../services/getBillDetail')
+const getBillDetail = require('@services/getBillDetail')
 
 module.exports = async (ctx, next) => {
     const { socket, taskPool } = ctx.state

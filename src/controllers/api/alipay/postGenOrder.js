@@ -1,7 +1,7 @@
-const utils = require('../../utils/utils')
-const { config } = require('../../constant/config')
-const error = require('../../constant/error')
-const createQRCode = require('../../services/createQRCode')
+const utils = require('../../../utils/utils')
+const { config } = require('../../../constant/config')
+const error = require('@constant/error')
+const createQRCode = require('@services/createQRCode')
 const { promisify } = require('util')
 
 module.exports = async (ctx, next) => {

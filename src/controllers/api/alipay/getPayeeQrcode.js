@@ -1,4 +1,4 @@
-const createQRCode = require('../../services/createQRCode')
+const createQRCode = require('@services/createQRCode')
 
 module.exports = async (ctx, next) => {
     const { socket, taskPool, getModelsPromise } = ctx.state
