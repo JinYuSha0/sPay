@@ -1,0 +1,50 @@
+extends common/layout
+include common/header
+include common/footer
+
+block title
+    title 支付订单
+
+block content
+    .container.page.page-process
+         .card
+            .card-header(style="background-color: #FFF;") 支付订单
+            .card-body
+                div(style="text-align: center;")
+                    #qrcode(style="display: inline-block;")
+                .free-time
+                    span 请在
+                    #minute_show
+                    #second_show
+                    span 内付款
+                div(style="margin: 0 auto; display: table;")
+                    p 订单号: #{oid}
+                    p 客户名称: #{name}
+                    p 金额: #{amount}
+                    p 备注: #{memo || '无'}
+
+    .modal.fade#modal1(tabindex="-1", role="dialog", aria-labelledby="modalLabel", aria-hidden="true")
+        .modal-dialog(role="document")
+            .modal-content
+                .modal-header
+                    h5.modal-title 支付成功
+                .modal-body(style="text-align: center;")
+                    i.fa.fa-check-circle(style="font-size: 100px; color: green;")
+                .modal-footer
+                    button.btn.btn-primary(type="button") 确认
+
+    .modal.fade#modal2(tabindex="-1", role="dialog", aria-labelledby="modalLabel", aria-hidden="true")
+        .modal-dialog(role="document")
+            .modal-content
+                .modal-header
+                    h5.modal-title 支付失败
+                .modal-body(style="text-align: center;")
+                    i.fa.fa-exclamation-triangle(style="font-size: 100px; color: red;")
+                .modal-footer
+                    button.btn.btn-primary(type="button") 确认
+                       
+append javascripts
+    script.
+        var oid = "#{oid}", qrcode = "#{qrCodeUrl}", freeTime = "#{freeTime}";
+    script(src="https://cdn.bootcss.com/lrsjng.jquery-qrcode/0.17.0/jquery-qrcode.min.js")
+    script(src="/js/process.js")

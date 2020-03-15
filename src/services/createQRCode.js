@@ -9,7 +9,6 @@ module.exports = async ({
     if (utils.isNil(desc)) {
         desc = `o-${TaskPool.genTaskId()}`
     }
-    console.log(desc)
     socket.emit(event.GET_QR_CODE, taskId, amount, desc)
     const content = JSON.parse(await taskPool.subscribe(taskId))
     // const { account, qrCodeUrl, printQrCodeUrl } = content

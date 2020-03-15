@@ -8,8 +8,8 @@ AlipayRouter.get('/getPayeeQrcode', require('./getPayeeQrcode'))
 AlipayRouter.get('/getUserInfo', require('./getUserInfo'))
 AlipayRouter.get('/getBillDetail', require('./getBillDetail'))
 AlipayRouter.get('/getMyInfo', require('./getMyInfo'))
-AlipayRouter.get('/postGenOrder', require('./postGenOrder'))
 AlipayRouter.get('/getPayResult', require('./getPayResult'))
 AlipayRouter.get('/getCollect', require('./getCollect'))
+AlipayRouter.post('/postGenOrder', require('./postGenOrder'))
 
 module.exports = AlipayRouter

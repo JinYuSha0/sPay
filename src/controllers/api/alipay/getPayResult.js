@@ -1,6 +1,4 @@
 const error = require('@constant/error')
-const { config } = require('@constant/config')
-const { promisify } = require('util')
 
 module.exports = async (ctx, next) => {
     const { redis, taskPool } = ctx.state
@@ -8,16 +6,16 @@ module.exports = async (ctx, next) => {
 
     let content
     const key = `active-${oid}`
-    const existsAsync = promisify(redis.exists).bind(redis)
-    const isExists = await existsAsync(key)
-    const ttlAsync = promisify(redis.ttl).bind(redis)
+    const isExists = await redis.existsAsync(key)
 
     if (isExists) {
-        const ttl = await ttlAsync(key)
+        const ttl = await redis.ttlAsync(key)
         content = await taskPool.subscribe(key, ttl * 1000)
+        // 清空session
+        ctx.session.order = null
     } else {
         throw error.Error403
     }
 
-    ctx.body = content
+    ctx.body = { code: 200, ...content }
 }

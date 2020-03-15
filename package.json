@@ -9,13 +9,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "koa-bodyparser": "^4.2.1",
     "koa-pug": "^4.0.3",
     "koa-router": "^8.0.8",
+    "koa-session2": "^2.2.10",
+    "koa-static": "^5.0.0",
     "koa2": "^2.0.0-alpha.7",
     "module-alias": "^2.2.2",
     "mongoose": "^5.9.3",
     "redis": "^3.0.2",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.3.0",
+    "uuid": "^7.0.2"
   },
   "_moduleAliases": {
     "@": "src",

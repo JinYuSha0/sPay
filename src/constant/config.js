@@ -10,4 +10,11 @@ exports.config = {
     payTimeoutSec: 5 * 60,
     mongodbUrl: 'mongodb://root:123456@localhost:27017/spay?authSource=admin',
     redisUrl: 'redis://localhost:6379',
+    session: {
+        key: 'sess',
+        path: '/',
+        maxAge: 1 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+        signed: true,
+    }
 }

@@ -1,9 +1,38 @@
-doctype html
-html(lang='zh')
-    head
-        meta(charset='utf-8')
-        meta(name='renderer' content='webkit')
-        title = 'sPay'
-    body
-        div#container
-            p Hello World!
+extends common/layout
+include common/header
+include common/footer
+
+block title
+    title 支付体验
+
+block head
+    meta(name="keywords", content="个人在线收款")
+
+block content
+    .container.page.page-pay
+        form.needs-validation(action="/api/a/postGenOrder", method="POST", novalidate)
+            .card
+                .card-header(style="background-color: #FFF;") 确认订单
+                .card-body
+                    .form-group
+                        label(for="nickname") 昵称
+                        input.form-control#nickname(name="name", required)
+                    .form-group
+                        label(for="method") 付款方式
+                        select.form-control#method(name="method")
+                            option(selected, value="1") 二维码
+                            option(disabled, value="2") 发起收款
+                    .form-group
+                        label(for="amount") 收款金额
+                        select.form-control#amount(name="amount")
+                            option(selected, value="0.01") 0.01 (测试)
+                            option(value="10") 10
+                            option(value="30") 30
+                    .form-group
+                        label(for="memo") 备注
+                        input.form-control#memo(name="memo")
+                .card-footer(style="background-color: #FFF; text-align: right;")
+                    button.btn.btn-primary(type="submit", style="border: none; background-color: #1890ff;") 创建订单
+
+append javascripts
+    script(src="/js/pay.js")

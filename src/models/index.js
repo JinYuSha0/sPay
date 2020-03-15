@@ -1,10 +1,12 @@
 const mongoose = require('mongoose')
 const Redis = require('redis')
+const { promisify } = require('util')
 
 const { config } = require('../constant/config')
 
 const schemas = {
     qrcode: require('./qrcode'),
+    order: require('./order'),
 }
 
 exports.db = async () => {
@@ -29,4 +31,15 @@ exports.db = async () => {
     }
 }
 
-exports.redis = Redis.createClient(config.redisUrl)
+const redis = Redis.createClient(config.redisUrl)
+;[
+    'keys',
+    'get',
+    'set',
+    'del',
+    'exists',
+    'ttl',
+].forEach((method) => {
+    redis[`${method}Async`] = promisify(redis[method]).bind(redis)
+})
+exports.redis = redis
