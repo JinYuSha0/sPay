@@ -17,7 +17,7 @@
     var modalHeight = $(window).height() / 2 - 100;
     $(".modal-dialog").css("margin-top", modalHeight);
     $(".modal-dialog .btn").on("click", function() {
-        window.location.href = "/pay";
+        window.location.href = "/";
     });
 })()
 
