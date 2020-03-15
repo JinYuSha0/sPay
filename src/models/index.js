@@ -39,6 +39,7 @@ const redis = Redis.createClient(config.redisUrl)
     'del',
     'exists',
     'ttl',
+    'mget',
 ].forEach((method) => {
     redis[`${method}Async`] = promisify(redis[method]).bind(redis)
 })

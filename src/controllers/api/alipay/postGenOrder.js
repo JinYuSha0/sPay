@@ -17,10 +17,16 @@ module.exports = async (ctx, next) => {
     }
 
     if (!ctx.session.order || ctx.session.order.timestamp < +new Date()) {
+        let excludeDesc = []
         const { QRCodeModel, OrderModel } = await getModelsPromise()
-        const actives = (await redis.keysAsync('active-*')).map(name => name.replace('active-', ''))
-        let qrcodeObj = (await QRCodeModel.find().byAmount(amount, actives))[0]
-    
+        const activeKeys = (await redis.keysAsync('active-*'))
+        if (activeKeys && activeKeys.length > 0) {
+            const activeDesc = (await redis.mgetAsync(activeKeys)).map((json) => (JSON.parse(json).desc))
+            excludeDesc = Array.from(new Set(activeDesc))
+        }
+
+        let qrcodeObj = (await QRCodeModel.find().byAmount(amount, excludeDesc))[0]
+
         if (!qrcodeObj) {
             qrcodeObj = await createQRCode({
                 socket,
