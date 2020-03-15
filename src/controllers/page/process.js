@@ -7,6 +7,6 @@ module.exports = async (ctx, next) => {
         }, true)
     } else {
         ctx.session.order = null
-        await ctx.response.redirect('/pay')
+        await ctx.response.redirect('/')
     }
 }
