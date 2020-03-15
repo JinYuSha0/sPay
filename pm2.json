@@ -2,7 +2,7 @@
     "apps" : [{
         "name": "spay", 
         "script": "./index.js",
-        "out_file": "./logs/chat_out.log",
-        "error_file": "./logs/chat_error.log"
+        "out_file": "./logs/out.log",
+        "error_file": "./logs/error.log"
       }]
 }
