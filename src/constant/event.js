@@ -11,6 +11,9 @@ module.exports = {
     GET_MY_INFO: 'getMyInfo',
     GET_MY_INFO_SUCCESS: 'getMyInfoSuccess',
 
+    GET_BILL_LIST: "getBillList",
+    GET_BILL_LIST_SUCCESS: "getBillListSuccess",
+
     GET_BILL_DETAIL: "getBillDetail",
     GET_BILL_DETAIL_SUCCESS: "getBillDetailSuccess",
 
