@@ -1,42 +1,28 @@
 const event = require('@constant/event')
 const { config } = require('@constant/config')
+const collectMoney = require('@services/collectMoney')
 const getBillList = require('@services/getBillList')
 
-module.exports = (io, taskPool, getModelsPromise) => {
+module.exports = (io, taskPool, getModelsPromise, redis) => {
     let _socket = null, isConnect = false
 
-    io.on(event.CONNECT, (socket) => {
+    io.on(event.CONNECT, async (socket) => {
         const { privateKey } = socket.handshake.query
         if (privateKey !== config.privateKey || isConnect) {
             socket.disconnect()
-        } else {
-            _socket = socket
-            isConnect = true
-            console.log('Device connect success')
-    
+        } else {    
             socket.on(event.DIS_CONNECT, () => {
                 _socket = null
                 isConnect = false
                 console.log('Device disconnect')
             })
 
-            socket.on(event.COLLECT_MONEY, async (tradeNO, _) => {
-                const { OrderModel } = await getModelsPromise()
-
-                // 账单列表
-                const billList = await getBillList(socket, taskPool)
-                // todo 获取大于上次处理时间戳的订单
-                // todo 通过billDetail获取二维码描述
-                // todo 抽象出来做防抖处理
-
-                // 获取最近一条使用该二维码描述的订单
-                const currOrder = (await OrderModel.find().getRecentlyOrderbyDesc(qrcodeDesc))[0]
-                // 更新订单状态
-                await OrderModel.updateStatusByOid(currOrder.oid, 2)
-                // 结束该任务
-                taskPool.finish(`active-${currOrder.oid}`, {
-                    oid: currOrder.oid,
-                    tradeNO,
+            socket.on(event.COLLECT_MONEY, async () => {
+                await collectMoney({
+                    getModelsPromise,
+                    redis,
+                    socket,
+                    taskPool,
                 })
             })
     
@@ -69,6 +55,14 @@ module.exports = (io, taskPool, getModelsPromise) => {
                     taskPool.finish(taskId, data)
                 } catch(_) {}
             })
+
+            // 获取最近一笔收款的时间戳
+            const billList = await getBillList(socket, taskPool)
+            await redis.setAsync('gmtCreate', billList[0].gmtCreate)
+
+            _socket = socket
+            isConnect = true
+            console.log('Device connect success')
         }
     })
 

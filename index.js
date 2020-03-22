@@ -26,8 +26,8 @@ const pug = new Pug({
     compileDebug: false,
 })
 
-const getSocket = socket(io, taskPool)
 const getModelsPromise = asyncMemo(db())
+const getSocket = socket(io, taskPool, getModelsPromise, redis)
 
 app.keys = [config.config.session.key]
 app.use(session({

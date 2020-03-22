@@ -15,6 +15,7 @@
     "koa-session2": "^2.2.10",
     "koa-static": "^5.0.0",
     "koa2": "^2.0.0-alpha.7",
+    "loadsh": "0.0.4",
     "module-alias": "^2.2.2",
     "mongoose": "^5.9.3",
     "redis": "^3.0.2",
