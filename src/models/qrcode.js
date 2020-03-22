@@ -8,6 +8,8 @@ const qrcodeSchema = new Schema({
     desc: { type: String, required: true, unique: true, index: true },
     qrCodeUrl: { type: String, required: true, unique: true },
     printQrCodeUrl: { type: String, required: true, unique: true },
+}, {
+    timestamps: true,
 })
 
 qrcodeSchema.query.byAmount = function(amount, descNin = []) {
